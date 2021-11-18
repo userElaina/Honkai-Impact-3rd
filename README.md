@@ -1,2 +1,4 @@
 # Honkai-Impact-3rd
-崩坏3相关
+`HI3_resolution_fix_after_RDP.bat` 
+崩坏3分辨率修正
+
