@@ -1,0 +1,6 @@
+*.json
+tmp
+temp
+archive
+old
+.version
