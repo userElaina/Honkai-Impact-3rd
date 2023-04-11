@@ -1,4 +1,5 @@
-*.json
+g*.json
+s*.json
 tmp
 temp
 archive
