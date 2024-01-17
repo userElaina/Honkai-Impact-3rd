@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 class main:
     class Btn(tk.Button):
         def __init__(self, master, xy, **kw):
@@ -8,14 +9,15 @@ class main:
             self._state = 0
             self._num = 0
 
-    def __init__(self, width=12, height=6):
+    def __init__(self, width=12, height=6, showsum=False):
         self.width = width
         self.height = height
+        self.showsum = showsum
         self._num = 0
 
     def run(self):
         self._tk = tk.Tk()
-        self._tk.title('Elysia')
+        self._tk.title('妖精爱莉布阵模拟器')
 
         self._line = tk.Label(self._tk, text='放置了 0 个妖精爱莉')
         self._line.grid(row=0, column=0, columnspan=3)
@@ -24,14 +26,29 @@ class main:
 
         for y in range(self.height):
             for x in range(self.width):
-                self._dict[(x, y)] = self.Btn(self._tk, xy=(x, y),
-                                          width=4, height=2, bd=1, relief='ridge')
-                self._dict[(x, y)].bind('<ButtonRelease-1>',
-                                    lambda event: self.click(event.widget))
-                self._dict[(x, y)].grid(row=y+1, column=x, sticky='nswe')
+                self._dict[(x, y)] = self.Btn(
+                    self._tk,
+                    xy=(x, y),
+                    width=4,
+                    height=2,
+                    bd=1,
+                    relief='ridge'
+                )
+                self._dict[(x, y)].bind(
+                    '<ButtonRelease-1>',
+                    lambda event: self.click(event.widget)
+                )
+                self._dict[(x, y)].grid(
+                    row=y+1,
+                    column=x,
+                    sticky='nswe'
+                )
                 self._dict[(x, y)].configure(
-                    bg='green', text=0, font=('黑体', 20, 'bold'))
-                # (,relief='flat')
+                    bg='green',
+                    text=0,
+                    font=('黑体', 20, 'bold'),
+                    # relief='flat'
+                )
 
         self._tk.mainloop()
 
@@ -91,9 +108,27 @@ class main:
             (x+15, y),
         ]
 
-        for xx, yy in atk:
-            if 0 <= xx <= self.width - 1 and 0 <= yy <= self.height - 1:
-                self._dict[(xx, yy)]._num += _add
-                self._dict[(xx, yy)].configure(text=self._dict[(xx, yy)]._num)
+        if self.showsum:
+            for xx, yy in atk:
+                if 0 <= xx <= self.width - 1 and 0 <= yy <= self.height - 1:
+                    self._dict[(xx, yy)]._num += _add
 
-main(12, 5).run()
+            for xx in range(self.width):
+                for yy in range(self.height):
+                    _sum = 0
+                    for zz in range(xx, self.width):
+                        _sum += self._dict[(zz, yy)]._num
+                    self._dict[(xx, yy)].configure(
+                        text=_sum
+                    )
+
+        else:
+            for xx, yy in atk:
+                if 0 <= xx <= self.width - 1 and 0 <= yy <= self.height - 1:
+                    self._dict[(xx, yy)]._num += _add
+                    self._dict[(xx, yy)].configure(
+                        text=self._dict[(xx, yy)]._num
+                    )
+
+
+main(12, 5, True).run()
