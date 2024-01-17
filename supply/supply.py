@@ -167,7 +167,11 @@ class Analyzer:
     ) -> None:
         self.supply = _supply
 
-    def analyze(self, before: Before = None, result: list[tuple[type, float]] = None) -> None:
+    def analyze(
+        self,
+        before: Before = None,
+        result: list[tuple[type, float]] = None
+    ) -> None:
         self.supply.prt_standard()
         self.supply.prt1()
 

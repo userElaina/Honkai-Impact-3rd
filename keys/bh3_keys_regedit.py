@@ -15,8 +15,13 @@ if os.path.exists('.version'):
 else:
     open(VERSION_FILE, 'w').write('0')
 
-a = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
-                   'Software\miHoYo\崩坏3', 0, winreg.KEY_ALL_ACCESS)
+a = winreg.OpenKey(
+    winreg.HKEY_CURRENT_USER,
+    'Software\\miHoYo\\崩坏3',
+    0,
+    winreg.KEY_ALL_ACCESS
+)
+
 b = winreg.QueryInfoKey(a)
 
 regs = None
